@@ -1,14 +1,8 @@
 PATH
-  remote: ../dry_validation_parser
-  specs:
-    dry_validation_parser (0.1.8)
-      dry-types (~> 1)
-      dry-validation (~> 1)
-
-PATH
   remote: .
   specs:
     dry_struct_generator (0.1.0)
+      dry-struct
       dry_validation_parser
 
 GEM
@@ -56,6 +50,9 @@ GEM
       dry-initializer (~> 3.0)
       dry-schema (>= 1.12, < 2)
       zeitwerk (~> 2.6)
+    dry_validation_parser (0.1.8)
+      dry-types (~> 1)
+      dry-validation (~> 1)
     ice_nine (0.11.2)
     json (2.7.1)
     language_server-protocol (3.17.0.3)
@@ -105,7 +102,7 @@ PLATFORMS
 DEPENDENCIES
   dry-struct
   dry_struct_generator!
-  dry_validation_parser!
+  dry_validation_parser
   rake (~> 13.0)
   rspec (~> 3.0)
   rubocop (~> 1.21)
