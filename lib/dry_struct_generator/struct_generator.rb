@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DryStructGenerator
   class StructGenerator
     @@definitions = {}
@@ -20,6 +22,7 @@ module DryStructGenerator
 
     def call(validator, options = {})
       return @@definitions[validator] if @@definitions[validator]
+
       validator_definition = validation_schema_parser.new.call(validator).keys.merge(options)
       result = generate(validator_definition)
 
@@ -30,24 +33,23 @@ module DryStructGenerator
 
     def generate(validator_definition)
       instance = self
-      Class.new(self.struct_class) do
+      Class.new(struct_class) do
         validator_definition.each do |field_name, schema|
           type = instance.get_field_type(schema)
-          schema.dig(:required) ? attribute(field_name.to_sym, type) : attribute?(field_name.to_sym, type)
+          schema[:required] ? attribute(field_name.to_sym, type) : attribute?(field_name.to_sym, type)
         end
       end
     end
 
     def get_field_type(schema)
-      if schema.dig(:array)
+      if schema[:array]
         type = type_to_dry_type[:array]
-        schema.dig(:keys) ? type = type.of(generate(schema.dig(:keys).to_sym)) :
-          type = type.of(type_to_dry_type[schema.dig(:type).to_sym])
-      elsif schema.dig(:keys)
-        type = generate(schema.dig(:keys))
+        type = schema[:keys] ? type.of(generate(schema[:keys].to_sym)) : type.of(type_to_dry_type[schema[:type].to_sym])
+      elsif schema[:keys]
+        type = generate(schema[:keys])
       else
-        type = type_to_dry_type[schema.dig(:type).to_sym]
-        type = type.optional if schema.dig(:nullable)
+        type = type_to_dry_type[schema[:type].to_sym]
+        type = type.optional if schema[:nullable]
       end
 
       type

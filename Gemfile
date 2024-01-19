@@ -11,5 +11,5 @@ gem "rspec", "~> 3.0"
 
 gem "rubocop", "~> 1.21"
 
-gem 'dry-struct'
+gem "dry-struct"
 gem "dry_validation_parser"

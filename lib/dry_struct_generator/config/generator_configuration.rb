@@ -1,4 +1,6 @@
-require 'dry_struct_generator/types'
+# frozen_string_literal: true
+
+require "dry_struct_generator/types"
 
 module DryStructGenerator
   module Config
