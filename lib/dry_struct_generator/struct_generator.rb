@@ -50,6 +50,7 @@ module DryStructGenerator
       else
         type = type_to_dry_type[schema[:type].to_sym]
         type = type.optional if schema[:nullable]
+        type = type.default(schema[:default]) if schema[:default]
       end
 
       type
