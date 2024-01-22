@@ -17,7 +17,8 @@ module DryStructGenerator
         'float': Types::Float,
         'integer': Types::Integer,
         'string': Types::String,
-        'time': Types::Time
+        'time': Types::Time,
+        'any': Types::Any
       }.freeze
     end
   end
