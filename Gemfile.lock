@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dry_struct_generator (0.1.0)
+    dry_struct_generator (0.3.1)
       dry-struct
       dry_validation_parser
 
