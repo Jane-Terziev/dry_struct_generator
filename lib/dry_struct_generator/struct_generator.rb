@@ -44,14 +44,19 @@ module DryStructGenerator
     def get_field_type(schema)
       if schema[:array]
         type = type_to_dry_type[:array]
-        type = schema[:keys] ? type.of(generate(schema[:keys].to_sym)) : type.of(type_to_dry_type[schema[:type].to_sym])
+        if schema[:keys]
+          type = type.of(generate(schema[:keys].to_sym))
+        elsif schema[:type]
+          type = type.of(type_to_dry_type[schema[:type].to_sym])
+        end
       elsif schema[:keys]
         type = generate(schema[:keys])
       else
         type = type_to_dry_type[schema[:type].to_sym]
-        type = type.optional if schema[:nullable]
-        type = type.default(schema[:default]) if schema[:default]
       end
+
+      type = type.optional if schema[:nullable]
+      type = type.default(schema[:default].freeze) if schema[:default]
 
       type
     end
