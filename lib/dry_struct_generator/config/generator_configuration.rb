@@ -15,6 +15,7 @@ module DryStructGenerator
         'date': Types::Date,
         'datetime': Types::DateTime,
         'float': Types::Float,
+        'decimal': Types::Decimal,
         'integer': Types::Integer,
         'string': Types::String,
         'time': Types::Time,
